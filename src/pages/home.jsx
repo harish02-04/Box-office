@@ -1,33 +1,48 @@
 import { useState } from 'react';
-import { search } from './../api/tvmaze';
+import { searchshows, searchactors } from './../api/tvmaze';
+import Searchform from './../components/searchform';
+import Renderact from './../components/actors/renderact';
+import Rendershw from './../components/shows/rendershw.jsx';
+
 const home = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [inp, setinp] = useState('');
+
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [api, setapi] = useState(null);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [apierr, setapierr] = useState(null);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
 
-  const Inputchange = ev => {
-    setinp(ev.target.value);
-  };
-  const searchQuery = async ev => {
-    ev.preventDefault();
-    const res = await search(inp);
-    console.log(res);
-    {
-      /*const response = await fetch(
-      `https://api.tvmaze.com/search/shows?q=${inp}`
-    );
-    const body = await response.json();
-    console.log(body);*/
+  const searchQuery = async (sop, inp) => {
+    try {
+      setapierr(null);
+      if (sop === 'shows') {
+        const res = await searchshows(inp);
+        setapi(res);
+      } else {
+        const res = await searchactors(inp);
+        setapi(res);
+      }
+    } catch (err) {
+      setapierr(err);
     }
   };
+  const renderapi = () => {
+    if (apierr) {
+      return <div>Error Occured:{apierr.message}</div>;
+    }
+    if (api?.length == 0) {
+      return <div>No Results</div>;
+    } else if (api) {
+      return api[0].show ? <Rendershw api={api} /> : <Renderact api={api} />;
+    }
+    return null;
+  };
+
   return (
     <div>
-      <h6>{inp}</h6>
-      <form onSubmit={searchQuery}>
-        <input type="text" value={inp} onChange={Inputchange}></input>
-        <button type="submit">Search</button>
-      </form>
+      <Searchform searchQuery={searchQuery}></Searchform>
+      <div>{renderapi()}</div>
     </div>
   );
 };

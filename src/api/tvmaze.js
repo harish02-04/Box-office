@@ -3,5 +3,6 @@ const getapi = async q => {
   const body = await response.json();
   return body;
 };
-export const search = q => getapi(`/search/shows?q=${q}`);
+export const searchshows = q => getapi(`/search/shows?q=${q}`);
+export const searchactors = q => getapi(`/search/people?q=${q}`);
 export { getapi };
