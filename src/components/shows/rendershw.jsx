@@ -8,6 +8,7 @@ const rshw = ({ api }) => {
           name={data.show.name}
           img={data.show.image ? data.show.image.medium : '/imgnf.png'}
           summary={data.show.summary}
+          id={data.show.id}
         ></Showcard>
       ))}
     </div>

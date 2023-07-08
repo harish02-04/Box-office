@@ -1,4 +1,4 @@
-const actcard = ({ name, img, bday, dday, gender, country }) => {
+const actcard = ({ name, img, bday, dday, gender, country}) => {
   return (
     <div>
       <img src={img}></img>

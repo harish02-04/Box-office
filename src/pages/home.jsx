@@ -3,29 +3,25 @@ import { searchshows, searchactors } from './../api/tvmaze';
 import Searchform from './../components/searchform';
 import Renderact from './../components/actors/renderact';
 import Rendershw from './../components/shows/rendershw.jsx';
+import { useQuery } from '@tanstack/react-query';
 
 const home = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-
+  const [filter, setfilter] = useState(null);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [api, setapi] = useState(null);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [apierr, setapierr] = useState(null);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { data: api, error: apierr } = useQuery({
+    queryKey: ['todos', filter],
+    queryFn: () =>
+      filter.sop === 'shows'
+        ? searchshows(filter.inp)
+        : searchactors(filter.inp),
+    // ⬇️ disabled as long as the filter is empty
+    enabled: !!filter,
+    refetchOnWindowFocus: 'false',
+  });
 
   const searchQuery = async (sop, inp) => {
-    try {
-      setapierr(null);
-      if (sop === 'shows') {
-        const res = await searchshows(inp);
-        setapi(res);
-      } else {
-        const res = await searchactors(inp);
-        setapi(res);
-      }
-    } catch (err) {
-      setapierr(err);
-    }
+    setfilter({ sop, inp });
   };
   const renderapi = () => {
     if (apierr) {

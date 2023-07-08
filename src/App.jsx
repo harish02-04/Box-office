@@ -1,18 +1,23 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/home';
 import Star from './pages/star';
+import ShowId from './pages/showId';
 import MainLayout from './components/main';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 function App() {
+  const queryClient = new QueryClient();
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<MainLayout />}>
-          <Route path="/home" element={<Home />}></Route>
-          <Route path="/star" element={<Star />}></Route>
-          <Route path="*" element={<div>Not Found</div>} />
-        </Route>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route path="/home" element={<Home />}></Route>
+            <Route path="/star" element={<Star />}></Route>
+            <Route path="*" element={<div>Not Found</div>} />
+          </Route>
+          <Route path="/show/:showId" element={<ShowId />}></Route>
 
-        {/*<Route path="/" element={<App />}>
+          {/*<Route path="/" element={<App />}>
           <Route index element={<Home />} />
           <Route path="teams" element={<Teams />}>
             <Route path=":teamId" element={<Team />} />
@@ -25,8 +30,9 @@ function App() {
           <Route path="/tos" element={<Tos />} />
         </Route>
   <Route path="contact-us" element={<Contact />} />*/}
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 
