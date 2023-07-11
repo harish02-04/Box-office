@@ -8,3 +8,8 @@ export const searchactors = q => getapi(`/search/people?q=${q}`);
 export { getapi };
 export const getshow = id =>
   getapi(`/shows/${id}?embed[]=seasons&embed[]=cast`);
+
+export const getshsbyid = async ids => {
+  const promises = ids.map(id => getapi(`/shows/${id}`));
+  return await Promise.all(promises);
+};

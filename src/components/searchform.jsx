@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { searchval } from '../lib/search';
 const searchform = ({ searchQuery }) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [inp, setinp] = useState('');
+  const [inp, setinp] = searchval();
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [sop, setsop] = useState('shows');
 

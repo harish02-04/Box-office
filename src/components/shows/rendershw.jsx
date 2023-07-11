@@ -1,33 +1,9 @@
-import { useEffect, useReducer } from 'react';
+import { usepersisted } from '../../lib/starredshw';
 import Showcard from './showcard';
 
 const rshw = ({ api }) => {
-  const usepersist = (reducer, initialState, localkey) => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [state, dispatch] = useReducer(reducer, initialState, initial => {
-      const pv = localStorage.getItem(localkey);
-      return pv ? JSON.parse(pv) : initial;
-    });
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-      localStorage.setItem(JSON.stringify(state), localkey);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [state, dispatch]);
-
-    return [state, dispatch];
-  };
-  const setstarred = (currval, action) => {
-    switch (action.type) {
-      case 'STAR':
-        return currval.concat(action.id);
-      case 'UNSTAR':
-        return currval.filter(shwid => shwid !== action.id);
-      default:
-        return currval;
-    }
-  };
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [currval, dispatch] = usepersist(setstarred, [], 'StarredShows');
+  const [currval, dispatch] = usepersisted();
 
   const starred = sid => {
     const isstar = currval.includes(sid);
@@ -37,6 +13,7 @@ const rshw = ({ api }) => {
       dispatch({ type: 'STAR', id: sid });
     }
   };
+  console.log(currval);
   return (
     <div>
       {api.map(data => (
@@ -47,6 +24,7 @@ const rshw = ({ api }) => {
           summary={data.show.summary}
           id={data.show.id}
           starred={starred}
+          isstar={currval.includes(data.show.id)}
         ></Showcard>
       ))}
     </div>

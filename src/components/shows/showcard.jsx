@@ -1,4 +1,4 @@
-const shwcard = ({ name, img, summary, id, starred }) => {
+const shwcard = ({ name, img, summary, id, starred, isstar }) => {
   const summ = summary
     ? summary.split(' ').slice(0, 10).join(' ').replace(/<.*?>/g, '')
     : 'No Description';
@@ -11,7 +11,7 @@ const shwcard = ({ name, img, summary, id, starred }) => {
         Read more
       </a>
       <button type="button" onClick={() => starred(id)}>
-        Starred
+        {isstar ? 'Unstar' : 'Star'}
       </button>
     </div>
   );
