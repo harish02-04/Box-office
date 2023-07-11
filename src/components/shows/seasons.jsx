@@ -10,13 +10,15 @@ export const Seasons = ({ season }) => {
       </p>
       <div>
         {season.map(seasons => {
-          <div key={seasons.id}>
-            <p>Season:{seasons.number}</p>
-            <p>Episodes:{seasons.episodeOrder}</p>
-            <p>
-              Aired:{seasons.premiereDate}-{seasons.endDate}
-            </p>
-          </div>;
+          return (
+            <div key={seasons.id}>
+              <p>Season:{seasons.number}</p>
+              <p>Episodes:{seasons.episodeOrder}</p>
+              <p>
+                Aired:{seasons.premiereDate} to {seasons.endDate}
+              </p>
+            </div>
+          );
         })}
       </div>
     </div>

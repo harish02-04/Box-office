@@ -1,7 +1,7 @@
 export const ShowMainData = ({ img, name, rating, summary, genres }) => {
   return (
     <div>
-      <img src={img ? img.original : '/public/imgnf.png'}></img>
+      <img src={img ? img.original : '/imgnf.png'}></img>
 
       <h1>Name:{name}</h1>
       <div>{rating.average || 'NA'}</div>

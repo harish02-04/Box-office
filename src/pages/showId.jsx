@@ -5,6 +5,7 @@ import { ShowMainData } from '../components/shows/showMainData';
 import { Details } from '../components/shows/details';
 import { Seasons } from '../components/shows/seasons';
 import { Casts } from '../components/shows/casts';
+import { Link } from 'react-router-dom';
 const show = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { showId } = useParams();
@@ -20,6 +21,8 @@ const show = () => {
     console.log(data._embedded.seasons);
     return (
       <div>
+        <Link to="/home">Go Back</Link>
+
         <ShowMainData
           img={data.image}
           name={data.name}
