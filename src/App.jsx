@@ -4,34 +4,23 @@ import Star from './pages/star';
 import ShowId from './pages/showId';
 import MainLayout from './components/main';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Globaltheme } from './theme';
 function App() {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<MainLayout />}>
-            <Route path="/home" element={<Home />}></Route>
-            <Route path="/star" element={<Star />}></Route>
+      <Globaltheme>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/star" element={<Star />}></Route>
+            </Route>
+            <Route path="/show/:showId" element={<ShowId />}></Route>
             <Route path="*" element={<div>Not Found</div>} />
-          </Route>
-          <Route path="/show/:showId" element={<ShowId />}></Route>
-
-          {/*<Route path="/" element={<App />}>
-          <Route index element={<Home />} />
-          <Route path="teams" element={<Teams />}>
-            <Route path=":teamId" element={<Team />} />
-            <Route path="new" element={<NewTeamForm />} />
-            <Route index element={<LeagueStandings />} />
-          </Route>
-        </Route>
-        <Route element={<PageLayout />}>
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/tos" element={<Tos />} />
-        </Route>
-  <Route path="contact-us" element={<Contact />} />*/}
-        </Routes>
-      </BrowserRouter>
+          </Routes>
+        </BrowserRouter>
+      </Globaltheme>
     </QueryClientProvider>
   );
 }
