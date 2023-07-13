@@ -4,6 +4,7 @@ import Searchform from './../components/searchform';
 import Renderact from './../components/actors/renderact';
 import Rendershw from './../components/shows/rendershw.jsx';
 import { useQuery } from '@tanstack/react-query';
+import { TextCenter } from '../components/common/Textcenter';
 
 const home = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -25,10 +26,10 @@ const home = () => {
   };
   const renderapi = () => {
     if (apierr) {
-      return <div>Error Occured:{apierr.message}</div>;
+      return <TextCenter>Error Occured:{apierr.message}</TextCenter>;
     }
     if (api?.length == 0) {
-      return <div>No Results</div>;
+      return <TextCenter>No Results</TextCenter>;
     } else if (api) {
       return api[0].show ? <Rendershw api={api} /> : <Renderact api={api} />;
     }

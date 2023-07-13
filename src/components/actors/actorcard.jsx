@@ -1,15 +1,19 @@
-const actcard = ({ name, img, bday, dday, gender, country}) => {
+import { SearchCard, SearchImgWrapper } from '../common/Searchcard';
+const actcard = ({ name, img, bday, dday, gender, country }) => {
   return (
-    <div>
-      <img src={img}></img>
+    <SearchCard>
+      <SearchImgWrapper>
+        <img src={img}></img>
+      </SearchImgWrapper>
+
       <h1>
         {name}
         {!!gender && `(${gender})`}
       </h1>
-      <h2>{!!bday && `Born:${bday}`}</h2>
-      <h2>{dday ? `Death: ${dday}` : 'Alive'}</h2>
-      <h2>{`Country:${country}`}</h2>
-    </div>
+      <p>{country ? `Comes from ${country}` : 'No country known'}</p>
+      <p>{!!bday && `Born ${bday}`}</p>
+      <p>{dday ? `Death: ${dday}` : 'Alive'}</p>
+    </SearchCard>
   );
 };
 export default actcard;

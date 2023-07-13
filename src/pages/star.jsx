@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { usepersisted } from '../lib/starredshw';
 import { getshsbyid } from '../api/tvmaze';
 import RenderShw from '../components/shows/rendershw.jsx';
+import { TextCenter } from '../components/common/Textcenter';
 const star = () => {
   const [starshwids] = usepersisted();
   console.log(starshwids);
@@ -13,13 +14,13 @@ const star = () => {
     refetchOnWindowFocus: 'false',
   });
   if (shw?.length == 0) {
-    return <div>No starred shows</div>;
+    return <TextCenter>No starred shows</TextCenter>;
   }
   if (shw?.length > 0) {
     return <RenderShw api={shw}></RenderShw>;
   } else if (shwerr) {
-    return <div>Error</div>;
+    return <TextCenter>Error</TextCenter>;
   }
-  return <div>Loading....</div>;
+  return <dTextCenter>Loading....</dTextCenter>;
 };
 export default star;

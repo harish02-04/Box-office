@@ -1,8 +1,9 @@
 import Actcard from './actorcard';
+import { FlexGrid } from '../common/flexgrid';
 const ract = ({ api }) => {
   console.log(api);
   return (
-    <div>
+    <FlexGrid>
       {api.map(data => (
         <Actcard
           key={data.person.id}
@@ -10,11 +11,11 @@ const ract = ({ api }) => {
           gender={data.person.gender}
           bday={data.person.birthday}
           dday={data.person.deathday}
-          country={data.country ? data.country.name : 'Not Known'}
+          country={data.person.country ? data.person.country.name : null}
           img={data.person.image ? data.person.image.medium : '/imgnf.png'}
         ></Actcard>
       ))}
-    </div>
+    </FlexGrid>
   );
 };
 export default ract;

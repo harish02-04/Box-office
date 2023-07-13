@@ -1,5 +1,6 @@
 import { usepersisted } from '../../lib/starredshw';
 import Showcard from './showcard';
+import { FlexGrid } from '../common/flexgrid';
 
 const rshw = ({ api }) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -15,7 +16,7 @@ const rshw = ({ api }) => {
   };
   console.log(currval);
   return (
-    <div>
+    <FlexGrid>
       {api.map(data => (
         <Showcard
           key={data.show.id}
@@ -27,7 +28,7 @@ const rshw = ({ api }) => {
           isstar={currval.includes(data.show.id)}
         ></Showcard>
       ))}
-    </div>
+    </FlexGrid>
   );
 };
 export default rshw;
