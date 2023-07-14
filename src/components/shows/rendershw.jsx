@@ -1,6 +1,7 @@
 import { usepersisted } from '../../lib/starredshw';
 import Showcard from './showcard';
 import { FlexGrid } from '../common/flexgrid';
+import NotFoundSrc from '../../lib/imgnf.png';
 
 const rshw = ({ api }) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -21,7 +22,7 @@ const rshw = ({ api }) => {
         <Showcard
           key={data.show.id}
           name={data.show.name}
-          img={data.show.image ? data.show.image.medium : '/imgnf.png'}
+          img={data.show.image ? data.show.image.medium : NotFoundSrc}
           summary={data.show.summary}
           id={data.show.id}
           starred={starred}

@@ -1,5 +1,6 @@
 import Actcard from './actorcard';
 import { FlexGrid } from '../common/flexgrid';
+import NotFoundSrc from '../../lib/imgnf.png';
 const ract = ({ api }) => {
   console.log(api);
   return (
@@ -12,7 +13,7 @@ const ract = ({ api }) => {
           bday={data.person.birthday}
           dday={data.person.deathday}
           country={data.person.country ? data.person.country.name : null}
-          img={data.person.image ? data.person.image.medium : '/imgnf.png'}
+          img={data.person.image ? data.person.image.medium : NotFoundSrc}
         ></Actcard>
       ))}
     </FlexGrid>
